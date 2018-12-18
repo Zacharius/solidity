@@ -367,6 +367,21 @@ arguments for certain opcodes are. In the following example,
 
     3 0x80 mload add 0x80 mstore
 
+Going through this step by step, from left to right:
+
+* ``3`` is put on the top of the stack.
+* ``0x80`` is put on the top of the stack.
+* ``mload`` is called, which takes the top most element as argument,
+  removes it from the stack and places the contents of the memory at address
+  ``0x80`` on the stack instead.
+* ``add`` is called which takes the two top most elements (the content of memory
+  position ``0x80`` followed by literal ``3``) as arguments and removes them
+  from the stack. It then pushes the result of the ``add`` operation on the
+  stack.
+* ``0x80`` is placed on the stack.
+* ``mstore`` is called, which takes the two top most elements as arguments and
+  writes the result of the ``add`` operation back to the memory position ``0x80``.
+
 Solidity inline assembly has a "functional style" notation where the same code
 would be written as follows:
 
